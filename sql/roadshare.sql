@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2015 at 07:25 AM
+-- Generation Time: Aug 22, 2015 at 04:14 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('824247cd94d4a9052f3015d087467f3d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1434601779, 'a:2:{s:9:"user_data";s:0:"";s:25:"flash:old:service_message";a:3:{s:5:"title";s:7:"Success";s:7:"message";s:54:"Your password has been changed and sent to your email.";s:6:"status";s:7:"success";}}'),
-('5cfb67f512883abda874fae4ba3b5c67', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0', 1435209799, '');
+('2960766f7dcc9f3011f001cf148d7aa9', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1440252165, 'a:1:{s:9:"user_data";a:12:{s:2:"id";s:1:"1";s:10:"first_name";s:3:"Ram";s:9:"last_name";s:5:"Krish";s:8:"password";s:32:"c51d2b8b90dc1eb9fff456d6a28655ca";s:5:"email";s:19:"ram.izaap@gmail.com";s:3:"dob";s:10:"1990-06-12";s:4:"role";s:1:"2";s:6:"gender";s:1:"M";s:11:"news_letter";s:1:"1";s:5:"phone";s:13:"1234567890222";s:3:"bio";s:0:"";s:11:"profile_img";s:0:"";}}'),
+('42a21fe84703d0612332ccf284ddab4d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440251229, '');
 
 -- --------------------------------------------------------
 
@@ -112,15 +112,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(200) NOT NULL,
   `dob` date NOT NULL,
   `role` int(11) NOT NULL,
-  `news_letter` int(11) NOT NULL
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `gender` enum('M','F') NOT NULL,
+  `news_letter` int(11) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `bio` text NOT NULL,
+  `profile_img` varchar(255) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `email`, `dob`, `role`, `news_letter`) VALUES
-(1, 'Ram', 'Krish', '4519ae61ad4460c2cc04e56ef30512b2', 'ram.izaap@gmail.com', '1990-06-12', 2, 1);
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `password`, `email`, `dob`, `role`, `gender`, `news_letter`, `phone`, `bio`, `profile_img`) VALUES
+(1, 'Ram', 'Krish', 'c51d2b8b90dc1eb9fff456d6a28655ca', 'ram.izaap@gmail.com', '1990-06-12', 2, 'M', 1, '1234567890222', '', 'images-2.jpg');
 
 --
 -- Indexes for dumped tables
@@ -168,7 +172,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -57,7 +57,7 @@
 			
 			<label>
 				
-				<input id="dob" type="text" class="datepicker" name="dob" value="<?php echo set_value('dob');?>" placeholder="Date Of Birth" /> 
+				<input id="dob" type="text" name="dob" value="<?php echo set_value('dob');?>" placeholder="Date Of Birth" /> 
 				<?php echo form_error('dob', '<span class="error_text">', '</span>'); ?>
 			</label>
 			

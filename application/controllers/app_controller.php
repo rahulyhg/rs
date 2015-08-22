@@ -8,6 +8,7 @@ class App_Controller extends CI_Controller
     public $role                       =    0;
     public $init_scripts               = array();
     public $criteria                   = array(); 
+    public $header                     = 'frontend/_partials/header';
     
    
     
@@ -15,7 +16,7 @@ class App_Controller extends CI_Controller
     {
         parent::__construct(); 
     
-    //print_r($this->session->userdata('user_data'));die;
+        //print_r($this->session->userdata('user_data'));die;
         $this->role = get_user_role();
         
         $this->init();
@@ -69,9 +70,20 @@ class App_Controller extends CI_Controller
             default:
                 $layout = $this->config->item('frontend', 'layout');
 
+                if( $this->router->fetch_class() == 'dashboard' )
+                {
+                    if( !is_logged_in() )
+                    {
+                        redirect('login');
+                    }
+                    $this->header = 'frontend/_partials/inner-header';
+                }
+                
                 if( !$layout )
-                            die('Layout not found.');
-                        
+                    die('Layout not found.');
+                
+                 
+
                 $this->layout->initialize($layout);
 
                 break;

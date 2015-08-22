@@ -14,15 +14,15 @@
 	<div class="banner_right">
 		<span><p>Driving Somewhere ?</p></span>
 		<img src="<?php echo include_img_path();?>/b_right_img.png" />
-		<p>Offer a Ride</p>
+		<a href="<?php echo site_url('offer_seats');?>"><p>Offer a Ride</p></a>
 	</div>
 	<div class="search">
 		<p>Find your ride offered by many drivers across Asia...</p>
 		<form>
-			<input type="text" name="from" id="from" class="input-from" title="From" placeholder="From" onClick="this.value=''" value="From" />
+			<input type="text" data-type="origin" name="from" id="from" class="input-from autocomplete" title="From" placeholder="From"   />
 
-			<input type="text" name="to" id="to" class="input-to" title="To" placeholder="To" onClick="this.value=''" value="To" />
-			<input type="text" name="date" id="date" class="input-date" title="Date" placeholder="Date" onClick="this.value=''" value="Date" />
+			<input type="text" data-type="destination" name="to" id="to" class="input-to autocomplete" title="To" placeholder="To"   />
+			<input type="text" name="date" id="date" class="input-date datepicker" title="Date" placeholder="yyyy-mm-dd"  />
 			<input type="submit"  name="search" id="search" value="Search Now" />
 		</form>
 	</div>

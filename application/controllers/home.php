@@ -5,15 +5,14 @@ class Home extends App_Controller {
     function __construct()
     {
         parent::__construct();       
-        
+        $this->init_scripts = array('frontend/_partials/google_script'); 
     }
 
     public function index()
     {
     	
         $this->layout->add_javascripts(array('home'));
-        $this->layout->add_stylesheets(array('global'));
-
+        
         $this->layout->view('frontend/home/home');
     }
     
@@ -29,6 +28,11 @@ class Home extends App_Controller {
 		$this->layout->view('frontend/home/faq');	
 		
 	}
+
+    function offer_seats()
+    {
+        $this->layout->view('frontend/home/offer_seats');
+    }
 	
 	
 }

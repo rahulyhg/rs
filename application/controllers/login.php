@@ -68,8 +68,9 @@ class Login extends App_Controller {
             
             if( isset($user_data['password']) && strcmp( $user_data['password'], md5($form['password']) ) === 0 )
             {
+                $this->session->set_userdata('user_data', $user_data);
             	$this->service_message->set_flash_message("login_success");
-                redirect();
+                redirect('dashboard');
             }
             else
             {

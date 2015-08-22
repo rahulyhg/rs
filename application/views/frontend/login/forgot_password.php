@@ -1,11 +1,11 @@
 <div class="sep_tab">
 
-    <form action="join-now.php" method="post" class="basic-grey" style="float:right; margin-top:-12px;">
+    <div class="basic-grey" style="float:right; margin-top:-6px;">
         <label>
-            <input type="submit" class="button" value="REGISTER" />
+            <a class="button" href="<?php echo site_url('join-now');?>">REGISTER</a>
         </label>   
         
-    </form>
+    </div>
 
     <h3 style="float:right; margin-top:20px; margin-right:10px;">Not a member?</h3>
 </div>
