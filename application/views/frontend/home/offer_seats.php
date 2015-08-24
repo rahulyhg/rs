@@ -17,7 +17,7 @@
 
 
 				<!-- fieldsets -->
-				<fieldset>
+				<fieldset id="fld_schdule">
 
 					<label>Departure</label>
 					<input type="text" data-type="origin" class="autocomplete" name="from" placeholder="Your departure point (address, city, station...)" />
@@ -58,7 +58,7 @@
 						<input type="button" name="next" class="next action-button" value="Continue" />
 					</div>
 				</fieldset>
-				<fieldset>
+				<fieldset id="fld_price">
 					<div id="price-details">
 
 					</div>
@@ -130,7 +130,7 @@
 							<input type="button" name="previous" class="previous action-button" value="Previous" />
 						</div>
 						<div style="float:right;width=40%;">
-							<input type="button" name="next" class="next action-button" value="Publish" />
+							<input type="button" name="next" class="submit-btn action-button" value="Publish" />
 						</div>
 					</div>
 				</fieldset>
@@ -164,12 +164,44 @@ var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
 $(".next").click(function(){
+
 	if(animating) return false;
 	animating = true;
 	
 	current_fs = $(this).parents('fieldset');
 	next_fs = $(this).parents('fieldset').next();
+
+	console.log(roadShare.origin);
+	console.log(roadShare.destination);
+	console.log($.isEmptyObject(roadShare.origin));
+	if( $.isEmptyObject(roadShare.origin) )
+	{
+		alert('Please Select Departure .');
+		animating = false;
+		return false;
+	}
+
+	if( $.isEmptyObject(roadShare.destination) )
+	{
+		alert('Please Select Arrival .');
+		animating = false;
+		return false;
+	}
 	
+	if( $('input[name="dep_date"]').val() == '' )
+	{
+		alert('Please Select Departure date .');
+		animating = false;
+		return false;
+	}
+
+	if( $('#round_trip').prop('checked') && $('input[name="ret_date"]').val() == '' )
+	{
+		alert('Please Select Return date .');
+		animating = false;
+		return false;
+	}
+
 	//activate next step on progressbar using the index of next_fs
 	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 	
@@ -243,8 +275,8 @@ $(".previous").click(function(){
 	if(animating) return false;
 	animating = true;
 	
-	current_fs = $(this).parent();
-	previous_fs = $(this).parent().prev();
+	current_fs = $(this).parents('fieldset');
+	previous_fs = $(this).parents('fieldset').prev();
 	
 	//de-activate current step on progressbar
 	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
@@ -286,4 +318,28 @@ $("#round_trip").bind('change', function(){
 });
 
 $("#round_trip").trigger('change');
+
+$('.submit-btn').on('click', function(){
+
+	if( !custom_validate_form() )
+		return false;
+
+	console.log('IIIIIII');
+	$.ajax({
+		url:site_url+'offer_seats',
+		method :'POST',
+		data:{orgin:roadShare.orgin},
+		dataType :'json',
+		success:function(resp){
+
+		}
+	});
+});
+
+
+function custom_validate_form()
+{
+	return true;
+}
+
 </script>

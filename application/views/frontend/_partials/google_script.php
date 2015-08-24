@@ -23,7 +23,7 @@
                 location.LatLng = new google.maps.LatLng(lat, lang);
                 location.formatted_address = place.formatted_address;
                 location.name = place.name;
-
+                location.LatLngString = lat+'|'+lang;
 
 
 
@@ -209,8 +209,12 @@
 
       })
       
-      
-      var defaults = {
+      new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 13.7563, lng: 100.5018},
+        zoom: 13
+      });
+
+      /*var defaults = {
             origin:new google.maps.LatLng(13.08, 80.27),
             destination: new google.maps.LatLng(13.08, 80.27),
             travelMode: google.maps.TravelMode.DRIVING,
@@ -225,6 +229,7 @@
 
       //roadShare.waypoints.push({name:'Natham', location:'Natham, Tamil Nadu, IN', stopover:true});
       roadShare.showDirection(document.getElementById('map'), defaults);
+      */
       
     };
 

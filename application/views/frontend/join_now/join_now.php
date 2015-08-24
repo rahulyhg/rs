@@ -1,6 +1,6 @@
 <div class="sep_tab">
 
-	<form action="" method="post" class="basic-grey" style="float:right; margin-top:-12px;">
+	<form action="<?php echo site_url('login');?>" method="post" class="basic-grey" style="float:right; margin-top:-12px;">
 		<label>
 			<input type="submit" class="button" value="LOG IN" />
 		</label>   

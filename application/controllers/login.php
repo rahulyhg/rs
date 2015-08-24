@@ -70,7 +70,7 @@ class Login extends App_Controller {
             {
                 $this->session->set_userdata('user_data', $user_data);
             	$this->service_message->set_flash_message("login_success");
-                redirect('dashboard');
+                redirect('dashboard/profile');
             }
             else
             {

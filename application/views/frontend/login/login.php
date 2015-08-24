@@ -1,6 +1,6 @@
 <div class="sep_tab">
 
-    <form action="join-now.php" method="post" class="basic-grey" style="float:right; margin-top:-12px;">
+    <form action="<?php echo site_url('join_now');?>" method="post" class="basic-grey" style="float:right; margin-top:-12px;">
         <label>
             <input type="submit" class="button" value="REGISTER" />
         </label>   
@@ -36,7 +36,7 @@
             </label>
             <label>
                 
-                <input id="pass" type="text" name="password"   placeholder="Password" /> <br/><p style="float:right; margin-right:59px;"><a href="<?php echo site_url('forgot_password');?>">Forgotten password ?</a></p>
+                <input id="pass" type="password" name="password"   placeholder="Password" /> <br/><p style="float:right; margin-right:59px;"><a href="<?php echo site_url('forgot_password');?>">Forgotten password ?</a></p>
                 <?php echo form_error('password', '<span class="error_text">', '</span>'); ?>
             </label>
             

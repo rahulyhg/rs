@@ -1,7 +1,7 @@
 
 <div id="header">
 	<div class="logo">
-		<a href="<?php echo site_url();?>"><img src="<?php echo include_img_path();?>/logo.jpg" /></a>
+		<a href="<?php echo site_url('');?>"><img src="<?php echo include_img_path();?>/logo.jpg" /></a>
 	</div>
 	<div class="nav">
 		<ul>

@@ -31,6 +31,13 @@ class Home extends App_Controller {
 
     function offer_seats()
     {
+        if( !is_logged_in() )
+            redirect('login');
+
+        if( $this->input->is_ajax_request() )
+        {
+            echo '<pre>';print_r($_POST);die;
+        }
         $this->layout->view('frontend/home/offer_seats');
     }
 	
