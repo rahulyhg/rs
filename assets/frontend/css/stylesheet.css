@@ -834,7 +834,7 @@ background-size: 40px 40px;
 	box-sizing: border-box;
 	width: 100%;
 	margin: 0;
-	
+	text-align: left;
 	
 }
 /*Hide all except first fieldset*/
@@ -842,11 +842,12 @@ background-size: 40px 40px;
 	display: none;
 }
 /*inputs*/
-#msform input, #msform textarea {
+#msform input[type="text"], #msform textarea {
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
+	margin-top: 10px;
 	width: 100%;
 	box-sizing: border-box;
 	font-family: montserrat;
@@ -887,6 +888,8 @@ background-size: 40px 40px;
 	overflow: hidden;
 	/*CSS counters to number the steps*/
 	counter-reset: step;
+	background: #f7f7f7;
+	padding-top: 15px;
 }
 #progressbar li {
 	list-style-type: none;
@@ -931,6 +934,8 @@ background-size: 40px 40px;
 	color: white;
 }
 
+#datetime{text-align: left;}
 
+ 
 
 

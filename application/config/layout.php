@@ -27,9 +27,9 @@ $config['layout']['frontend']['img_dir']  = base_url('assets/frontend/images');
 $config['layout']['frontend']['template'] = 'frontend/layouts/frontend';
 $config['layout']['frontend']['title']    = 'Road Share :: Home';
 
-$config['layout']['frontend']['javascripts'] = array("jquery-1.11.3.min","jquery-ui.min","slides.min.jquery", "common");
+$config['layout']['frontend']['javascripts'] = array("jquery-1.11.3.min","jquery-ui.min","jquery.datetimepicker","slides.min.jquery", "common");
  
-$config['layout']['frontend']['stylesheets'] = array("jquery-ui","stylesheet", "global");
+$config['layout']['frontend']['stylesheets'] = array("jquery-ui","jquery.datetimepicker","stylesheet", "global");
 
 $config['layout']['frontend']['description'] = 'Road Share :: Home';
 $config['layout']['frontend']['keywords']    = 'Road Share :: Home';

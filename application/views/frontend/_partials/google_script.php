@@ -4,6 +4,9 @@
         roadShare.origin = {};
         roadShare.destination = {};
         roadShare.waypoints = [];
+        roadShare.route_details = [];
+        roadShare.totalDist = 0;//km
+        roadShare.totalTime = 0;//hr:mins
 
     (function(roadShare, $){ 
 
@@ -19,6 +22,7 @@
             var location = {};
                 location.LatLng = new google.maps.LatLng(lat, lang);
                 location.formatted_address = place.formatted_address;
+                location.name = place.name;
 
 
 
@@ -40,7 +44,9 @@
             console.log(place);
             console.log(place.geometry.location.toString());
             console.log(place.geometry.location.toUrlValue());
-            $.fn.googleDirection();
+
+            if( !$.isEmptyObject(roadShare.origin) && !$.isEmptyObject(roadShare.destination))
+              $.fn.googleDirection();
         });
       };
 
@@ -69,7 +75,21 @@
               document.getElementById('warnings_panel').innerHTML =
                   '<b>' + response.routes[0].warnings + '</b>';
               directionsDisplay.setDirections(response);
-              //showSteps(response, markerArray, stepDisplay, map);
+              
+              /*var route = response.routes[0];
+              var summaryPanel = document.getElementById("directions_panel");
+              summaryPanel.innerHTML = "";
+              // For each route, display summary information.
+              for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                summaryPanel.innerHTML += "<b>Route Segment: " + routeSegment + "</b><br />";
+                summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+                summaryPanel.innerHTML += route.legs[i].end_address + "<br />";
+                summaryPanel.innerHTML += route.legs[i].distance.text + "<br /><br />";
+                console.log(route.legs[i]);
+              }*/
+              
+              computeTotalDistance(response);
             } 
             else 
             {
@@ -79,6 +99,57 @@
       };
 
       
+      function computeTotalDistance(result) {
+        var totalDist = 0;
+        var totalTime = 0;
+        var myroute = result.routes[0];
+        
+        console.log(result);    
+        console.log(myroute.waypoint_order);
+        roadShare.route_details = [];
+        for (i = 0; i < myroute.legs.length; i++) 
+        {
+          
+
+          var tmp = {};
+          if( i == 0 && myroute.legs.length == 1 )
+          {
+              tmp.from = roadShare.origin.name;
+              tmp.to   = roadShare.destination.name;
+          }
+          else if( i == 0)
+          {
+              tmp.from = roadShare.origin.name;
+              tmp.to   = roadShare.waypoints[myroute.waypoint_order[i]].name;
+          }
+          else if(i>0 && i<myroute.legs.length-1)
+          {
+              tmp.from = roadShare.waypoints[myroute.waypoint_order[i-1]].name;
+              tmp.to   = roadShare.waypoints[myroute.waypoint_order[i]].name;
+          }
+          else
+          {
+              tmp.from = roadShare.waypoints[myroute.waypoint_order[i-1]].name;
+              tmp.to   = roadShare.destination.name;
+          }
+
+          tmp.totalDist = myroute.legs[i].distance.value;
+          tmp.totalTime = myroute.legs[i].duration.value;
+
+          roadShare.route_details.push(tmp);
+
+          totalDist += myroute.legs[i].distance.value;
+          totalTime += myroute.legs[i].duration.value;
+        }
+        totalDist = totalDist / 1000;
+
+        console.log(roadShare.route_details);
+
+        roadShare.totalDist = totalDist;
+        roadShare.totalTime = totalTime;
+        //document.getElementById("total_distance").innerHTML = "total distance is: " + totalDist + " km<br>total time is: " + (totalTime / 60).toFixed(2) + " minutes";
+      }
+
       $.fn.googleAutocomplete = function(options) {
         
         var defaults = {
@@ -122,27 +193,7 @@
       };
 
 
-      /*function showSteps(directionResult, markerArray, stepDisplay, map) {
-        // For each step, place a marker, and add the text to the marker's infowindow.
-        // Also attach the marker to an array so we can keep track of it and remove it
-        // when calculating new routes.
-        var myRoute = directionResult.routes[0].legs[0];
-        for (var i = 0; i < myRoute.steps.length; i++) {
-          var marker = markerArray[i] = markerArray[i] || new google.maps.Marker;
-          marker.setMap(map);
-          marker.setPosition(myRoute.steps[i].start_location);
-          attachInstructionText(stepDisplay, marker, myRoute.steps[i].instructions);
-        }
-      }
-
-      function attachInstructionText(stepDisplay, marker, text, map) {
-        google.maps.event.addListener(marker, 'click', function() {
-          // Open an info window when the marker is clicked on, containing the text
-          // of the step.
-          stepDisplay.setContent(text);
-          stepDisplay.open(map, marker);
-        });
-      }*/
+      
     })(roadShare || {}, window.jQuery || window.$);
 
 
@@ -161,10 +212,18 @@
       
       var defaults = {
             origin:new google.maps.LatLng(13.08, 80.27),
-            destination: new google.maps.LatLng(10.35, 77.95),
+            destination: new google.maps.LatLng(13.08, 80.27),
             travelMode: google.maps.TravelMode.DRIVING,
-            waypoints:[{location:'Natham, Tamil Nadu, IN', stopover:true}],
+            //waypoints:[{location:'Natham, Tamil Nadu, IN', stopover:true}],
         };
+
+      roadShare.origin.name = 'Chennai';
+      roadShare.origin.LatLng = new google.maps.LatLng(13.08, 80.27);
+
+      roadShare.destination.name = 'Madurai';
+      roadShare.destination.LatLng = new google.maps.LatLng(13.08, 80.27);
+
+      //roadShare.waypoints.push({name:'Natham', location:'Natham, Tamil Nadu, IN', stopover:true});
       roadShare.showDirection(document.getElementById('map'), defaults);
       
     };
