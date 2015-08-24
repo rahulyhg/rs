@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2015 at 04:14 PM
+-- Generation Time: Aug 24, 2015 at 05:53 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -39,8 +39,7 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`session_id`, `ip_address`, `user_agent`, `last_activity`, `user_data`) VALUES
-('2960766f7dcc9f3011f001cf148d7aa9', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1440252165, 'a:1:{s:9:"user_data";a:12:{s:2:"id";s:1:"1";s:10:"first_name";s:3:"Ram";s:9:"last_name";s:5:"Krish";s:8:"password";s:32:"c51d2b8b90dc1eb9fff456d6a28655ca";s:5:"email";s:19:"ram.izaap@gmail.com";s:3:"dob";s:10:"1990-06-12";s:4:"role";s:1:"2";s:6:"gender";s:1:"M";s:11:"news_letter";s:1:"1";s:5:"phone";s:13:"1234567890222";s:3:"bio";s:0:"";s:11:"profile_img";s:0:"";}}'),
-('42a21fe84703d0612332ccf284ddab4d', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36', 1440251229, '');
+('25f127b441866d2eea44fb01e674c184', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0', 1440388194, '');
 
 -- --------------------------------------------------------
 
@@ -74,6 +73,52 @@ INSERT INTO `log` (`id`, `action`, `action_id`, `line`, `created_id`, `updated_i
 (8, 'Product#11 (Cool wear for Mens) record has been created.', 11, 'product', 8, 8, '2015-04-06 13:42:23', '2015-04-06 08:12:23'),
 (9, 'Product#12 (Kids wear for summer) record has been created.', 12, 'product', 8, 8, '2015-04-06 13:46:34', '2015-04-06 08:16:34'),
 (10, 'Role#2 (Customer) record has been updated.', 2, 'role', 8, 8, '2015-04-09 14:22:57', '2015-04-09 08:52:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rides`
+--
+
+CREATE TABLE IF NOT EXISTS `rides` (
+`id` int(11) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `origin_name` varchar(255) NOT NULL,
+  `origin_address` varchar(255) NOT NULL,
+  `origin_latlng` varchar(255) NOT NULL,
+  `dest_name` varchar(255) NOT NULL,
+  `dest_address` varchar(255) NOT NULL,
+  `dest_latlng` varchar(255) NOT NULL,
+  `type` enum('OT','R') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ride_schedules`
+--
+
+CREATE TABLE IF NOT EXISTS `ride_schedules` (
+`id` int(11) NOT NULL,
+  `ride_id` int(11) NOT NULL,
+  `day` int(11) NOT NULL,
+  `time` time NOT NULL,
+  `until` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ride_waypoints`
+--
+
+CREATE TABLE IF NOT EXISTS `ride_waypoints` (
+`id` int(11) NOT NULL,
+  `ride_id` int(11) NOT NULL,
+  `wp_name` varchar(255) NOT NULL,
+  `wp_address` varchar(255) NOT NULL,
+  `wp_latlng` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -143,6 +188,24 @@ ALTER TABLE `log`
  ADD PRIMARY KEY (`id`), ADD KEY `fk_sales_channel_user1` (`created_id`), ADD KEY `fk_sales_channel_user2` (`updated_id`);
 
 --
+-- Indexes for table `rides`
+--
+ALTER TABLE `rides`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ride_schedules`
+--
+ALTER TABLE `ride_schedules`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ride_waypoints`
+--
+ALTER TABLE `ride_waypoints`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -163,6 +226,21 @@ ALTER TABLE `users`
 --
 ALTER TABLE `log`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `rides`
+--
+ALTER TABLE `rides`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ride_schedules`
+--
+ALTER TABLE `ride_schedules`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `ride_waypoints`
+--
+ALTER TABLE `ride_waypoints`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `roles`
 --
