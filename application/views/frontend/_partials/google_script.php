@@ -7,6 +7,7 @@
         roadShare.route_details = [];
         roadShare.totalDist = 0;//km
         roadShare.totalTime = 0;//hr:mins
+        roadShare.waypoint_order = [];
 
     (function(roadShare, $){ 
 
@@ -103,6 +104,7 @@
         var totalDist = 0;
         var totalTime = 0;
         var myroute = result.routes[0];
+        roadShare.waypoint_order = myroute.waypoint_order;
         
         console.log(result);    
         console.log(myroute.waypoint_order);
@@ -112,6 +114,9 @@
           
 
           var tmp = {};
+              tmp.totalDist = myroute.legs[i].distance.value;
+              tmp.totalTime = myroute.legs[i].duration.value;
+
           if( i == 0 && myroute.legs.length == 1 )
           {
               tmp.from = roadShare.origin.name;
@@ -132,9 +137,6 @@
               tmp.from = roadShare.waypoints[myroute.waypoint_order[i-1]].name;
               tmp.to   = roadShare.destination.name;
           }
-
-          tmp.totalDist = myroute.legs[i].distance.value;
-          tmp.totalTime = myroute.legs[i].duration.value;
 
           roadShare.route_details.push(tmp);
 

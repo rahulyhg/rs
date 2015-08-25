@@ -65,14 +65,14 @@
 					<div class="clear"></div>
 					<div>
 						<div style="float:left;width=60%">Number of seats offered:</div>
-						<div style="float:right;width=30%;"><input type="text" value="3" style="width:80%;padding:3px;" />
+						<div style="float:right;width=30%;"><input type="text" name="seat_count" value="3" style="width:80%;padding:3px;" />
 					</div>
 					<div class="clear"></div>
 					<div>
 						<h2>Ride Details</h2>
 						<p>Please add further details about your ride - it'll save you answering lots of questions from co-travellers.
 						</p>
-						<textarea name="ride_deatils" id="ride_deatils"></textarea>
+						<textarea name="ride_details" id="ride_details"></textarea>
 						<p> Please do not add your contact details here. Interested co-travellers will receive your phone number individually (See our rules) 
 						</p>
 
@@ -174,7 +174,7 @@ $(".next").click(function(){
 	console.log(roadShare.origin);
 	console.log(roadShare.destination);
 	console.log($.isEmptyObject(roadShare.origin));
-	if( $.isEmptyObject(roadShare.origin) )
+	/*if( $.isEmptyObject(roadShare.origin) )
 	{
 		alert('Please Select Departure .');
 		animating = false;
@@ -194,7 +194,7 @@ $(".next").click(function(){
 		animating = false;
 		return false;
 	}
-
+	*/
 	if( $('#round_trip').prop('checked') && $('input[name="ret_date"]').val() == '' )
 	{
 		alert('Please Select Return date .');
@@ -321,14 +321,55 @@ $("#round_trip").trigger('change');
 
 $('.submit-btn').on('click', function(){
 
-	if( !custom_validate_form() )
+	
+	if( $('#ride_details').val() == '' )
+	{
+		alert( 'Please enter ride details. ');
+		return false;	
+	}
+	if( !$('input[name="tc"]').prop('checked') )
+	{
+		alert( 'Please read and accept the T&Cs. ');
 		return false;
+	}
 
-	console.log('IIIIIII');
+	var $data = {};	
+
+	$data.origin_name = roadShare.origin.name;
+	$data.origin_latlng = roadShare.origin.LatLngString;
+	$data.origin_address = roadShare.origin.formatted_address;
+
+	$data.dest_name = roadShare.destination.name;
+	$data.dest_latlng = roadShare.destination.LatLngString;
+	$data.dest_address = roadShare.destination.formatted_address;
+
+	$data.ride_type = $('#round_trip').prop('checked')?'1':'0';
+	$data.dep_date = $('input[name="dep_date"]').val();
+	$data.ret_date = $('input[name="ret_date"]').val();
+
+	$data.waypoints = [];
+	for(var i=0;i<roadShare.waypoints.length; i++)
+	{
+		var tmp = {};
+			tmp.name = roadShare.waypoints[i].name;
+			tmp.address = roadShare.waypoints[i].formatted_address;
+			tmp.latlng = roadShare.waypoints[i].LatLngString;
+
+		$data.waypoints.push(tmp);
+	}
+
+	$data.total_dist 			= roadShare.totalDist;
+	$data.total_time 			= roadShare.totalTime;
+	$data.seat_count 			= $('input[name="seat_count"]').val();
+	$data.ride_details 			= $('input[name="ride_details"]').val();
+	$data.luggage 				= $('input[name="luggage"]').val();
+	$data.schedule_flexibility 	= $('input[name="schedule_flexibility"]').val();
+	$data.detour_flexibility 	= $('input[name="detour_flexibility"]').val();
+
 	$.ajax({
 		url:site_url+'offer_seats',
 		method :'POST',
-		data:{orgin:roadShare.orgin},
+		data:$data,
 		dataType :'json',
 		success:function(resp){
 
@@ -337,9 +378,6 @@ $('.submit-btn').on('click', function(){
 });
 
 
-function custom_validate_form()
-{
-	return true;
-}
+
 
 </script>
