@@ -21,12 +21,30 @@ class Ride_sharing extends App_Controller {
         $this->layout->view('frontend/ride_sharing');
     }
 
+    function view($schedule_id='')
+    {
+        try
+            {
+                $this->data['message']='';
+
+                if(!(int)$schedule_id)
+                    throw new Exception("Not a valid ride!");
+
+                $this->data['view_data'] = $this->rides_model->get_ride_view($schedule_id);
+
+            }
+            catch(Exception $e)
+            {
+                $this->data['message'] = $e->getMessage();
+            }    
+
+        $this->layout->view('frontend/ride_view');    
+    }
+
     function get_rules()
     {
         
     }
     
-    
-	
 }
 ?>

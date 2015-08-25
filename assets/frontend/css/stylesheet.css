@@ -947,3 +947,126 @@ background-size: 40px 40px;
 .sec3{width: 15%; float: left;padding-left: 15px;}
 
 
+.ride_list{
+	cursor:pointer;
+}
+.ride_list:hover{
+	background-color: red; 
+}
+
+.ride_detail{
+    box-shadow: 2px #E4E4E4;
+    border: 3px solid #E4E4E4;
+    width:430px;
+    float:left;
+}
+.ride_detail .head{
+	box-shadow: 0 0 2px #E4E4E4;
+    border-bottom: 3px solid #E4E4E4;
+    background-color:#F2EFEF;
+    margin:0;
+    padding:0;
+}
+.ride_detail .head h1{margin: 2px 12px;padding:4px;}
+
+.ride_detail .detail tr td{padding:1px 0 10px 5px;border-bottom: 1px solid #E4E4E4;}
+.ride_detail .detail tr td.tit{font-size:12px; color:#808080; }
+
+.ride_detail .desc{background-color:#AFEEEE;margin:10px;font-size:12px; color:#484848 }
+.ride_detail .desc tr td{padding:1px 0 10px 10px;}
+.ride_detail .desc h2{margin-bottom:3px;}
+.ride_detail .desc tr td.tit{padding-left:35px; font-style: italic;}
+.ride_detail .offer_seen{font-size:12px;float:right;padding:5px 10px 10px 0;color:#484848}
+
+.owner_detail{
+	width:250px;
+    float:right;
+}
+
+.owner_detail .price{
+	box-shadow: 2px #E4E4E4;
+    border: 3px solid #E4E4E4;
+}
+
+.owner_detail .price .head{
+	box-shadow: 0 0 2px #E4E4E4;
+    border-bottom: 3px solid #E4E4E4;
+    background-color:#FFF;
+    font-size:14px;
+    color:#808080;
+    padding:5px;
+}
+.owner_detail .price .head span{
+    font-size:22px;
+    color:#003B69;
+    font-weight:bold;
+}
+
+.owner_detail .price .seat{
+	box-shadow: 0 0 2px #E4E4E4;
+    border-bottom: 3px solid #E4E4E4;
+    background-color:#F8F8F8 ;
+    font-size:14px;
+    color:#808080;
+    padding:5px;
+}
+
+.owner_detail .price .seat span{
+	font-size:22px;
+    color:#003B69;
+    font-weight:bold;
+}
+
+.owner_detail .price .book_seat{
+	padding:5px 0 10px 15px;
+	font-size:14px;
+    color:#808080;
+    background-color:#F5FFFA;
+}
+.owner_detail .price .book_seat p{
+	font-size:14px;
+    color:#808080;
+}
+
+.owner_detail .price .book_seat .button {
+    background: #ef5300;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    color: #FFF;
+    border-radius: 3px;
+    text-shadow: 1px 1px 1px #9E3F3F;
+    cursor: pointer;
+    text-decoration:none;
+    margin-bottom:10px;
+}
+.owner_detail .price .book_seat .button:hover {
+    background: #003b68;
+}
+
+.owner_detail .car{
+	box-shadow: 2px #E4E4E4;
+    border: 3px solid #E4E4E4;
+}
+
+.owner_detail .car .head{
+	box-shadow: 0 0 2px #E4E4E4;
+    border-bottom: 3px solid #E4E4E4;
+    background-color:#F2EFEF;
+    padding:3px;
+   
+}
+.owner_detail .car .detail tr td{padding:5px 0 5px 5px; color:#808080; font-size:13px;}
+.owner_detail .car .detail p{color:#808080; font-size:13px;}
+.owner_detail .car .detail tr td.phone{color:green;padding-bottom:15px; border-bottom:1px solid #E4E4E4;}
+.owner_detail .car .detail tr td.mem{font-weight:bold;color:#000;font-size:15px;padding-top:10px;}
+
+#book-popup {  
+    width: 500px;  
+    background:#e8e8e8;
+    border: 1px solid #dadada;
+    font-family:sans-serif;
+    padding: 5px 10px 20px 20px;
+    position:absolute;
+    left:30%;
+    z-index:1001px;
+} 

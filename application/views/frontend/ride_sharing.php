@@ -56,7 +56,7 @@
                         $user_img = base_url('assets/uploads/users/'.$ride['profile_img']);
 
             ?>
-                  <div>
+                  <div class="ride_list" onclick="window.location.href='<?php echo site_url("ride_sharing/view/{$ride['schedule_id']}");?>';">
                         <div class="sec1">
                               <div class="left">
                                     <img src="<?php echo $user_img;?>" />                 

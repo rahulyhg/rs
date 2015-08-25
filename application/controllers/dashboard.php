@@ -457,7 +457,8 @@ class Dashboard extends App_Controller {
                     throw new Exception("Database error.");
 
                 //Enter Ride Details
-                $ride_details = [];
+                $ride_details=array();
+
                 $ride_details['ride_id']                = $ride_id;
                 $ride_details['seat_count']             = $form['seat_count'];
                 $ride_details['description']            = $form['ride_details'];
@@ -475,7 +476,7 @@ class Dashboard extends App_Controller {
                 if( !is_valid_date($dep_date, 'Y-m-d H:i') )
                     throw new Exception("Deaprture date is invalid.");
 
-                $ride_schedules = [];
+                $ride_schedules = array();
                 $ride_schedules['ride_id']               = $ride_id;
                 $ride_schedules['ride_day']              = date('w', strtotime($dep_date));
                 $ride_schedules['ride_start_time']       = date('H:i', strtotime($dep_date));
@@ -492,7 +493,7 @@ class Dashboard extends App_Controller {
                     if( !is_valid_date($ret_date, 'Y-m-d H:i') )
                         throw new Exception("Return date is invalid.");
 
-                    $ride_schedules = [];
+                    $ride_schedules = array();
                     $ride_schedules['ride_id']               = $ride_id;
                     $ride_schedules['ride_day']              = date('w', strtotime($ret_date));
                     $ride_schedules['ride_start_time']       = date('H:i', strtotime($ret_date));
