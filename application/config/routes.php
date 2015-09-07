@@ -52,7 +52,7 @@ $route['admin/message/edit/(:num)'] = 'admin/message/add/$1';
 
 $route['how-it-works'] 		= 'home/how_it_works';
 $route['faq'] 				= 'home/faq';
-$route['offer_seats']		= 'home/offer_seats';
+$route['offer_seats']		= 'dashboard/offer_seats';
 $route['join-now'] 			= 'join_now';
 $route['forgot_password'] 	= 'login/forgot_password';
 $route['reset_password/(:any)'] 	= 'login/reset_password/$1';

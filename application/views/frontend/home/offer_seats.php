@@ -1,4 +1,6 @@
+<?php echo $tmenu;?>
 
+<div class="clear"></div>
 
 <div class="cont">
 	<div class="l_cont offer-seat">
@@ -38,7 +40,7 @@
   
 					   <div>
 		               		<div style="float:left"><h2>Date and Time </h2> </div>
-		               		<div style="float:right;margin-top:17px;"> <input type="checkbox" name="round_trip" id="round_trip"> Round Trip</div>
+		               		<div style="float:right;margin-top:17px;"> <input type="checkbox" name="round_trip" id="round_trip" value="round_trip"> Round Trip</div>
 		            	</div>
 		            	
 		            	<div class="clear"></div>
@@ -343,9 +345,9 @@ $('.submit-btn').on('click', function(){
 	$data.dest_latlng = roadShare.destination.LatLngString;
 	$data.dest_address = roadShare.destination.formatted_address;
 
-	$data.ride_type = $('#round_trip').prop('checked')?'1':'0';
-	$data.dep_date = $('input[name="dep_date"]').val();
-	$data.ret_date = $('input[name="ret_date"]').val();
+	$data.ride_type 	= $('#round_trip').prop('checked')?'up_down':'up';
+	$data.dep_date 		= convertToGMT( $('input[name="dep_date"]').val() );
+	$data.ret_date 		= convertToGMT( $('input[name="ret_date"]').val() );
 
 	$data.waypoints = [];
 	for(var i=0;i<roadShare.waypoints.length; i++)
@@ -361,23 +363,44 @@ $('.submit-btn').on('click', function(){
 	$data.total_dist 			= roadShare.totalDist;
 	$data.total_time 			= roadShare.totalTime;
 	$data.seat_count 			= $('input[name="seat_count"]').val();
-	$data.ride_details 			= $('input[name="ride_details"]').val();
-	$data.luggage 				= $('input[name="luggage"]').val();
-	$data.schedule_flexibility 	= $('input[name="schedule_flexibility"]').val();
-	$data.detour_flexibility 	= $('input[name="detour_flexibility"]').val();
+	$data.ride_details 			= $('[name="ride_details"]').val();
+	$data.luggage 				= $('select[name="luggage"]').val();
+	$data.schedule_flexibility 	= $('select[name="schedule_flexibility"]').val();
+	$data.detour_flexibility 	= $('select[name="detour_flexibility"]').val();
 
+	//console.log($data);
 	$.ajax({
 		url:site_url+'offer_seats',
 		method :'POST',
 		data:$data,
 		dataType :'json',
 		success:function(resp){
+			if( resp.status == 'success' )
+			{
+				alert(resp.message);
+			}
+			else if(resp.message == 'Your session is expired.')
+			{
+				alert(resp.message);
+				location.href = site_url+'login';
+			}
+			else
+			{
+				alert(resp.message);
+			}
 
 		}
 	});
 });
 
 
-
+function convertToGMT( date_time )
+{
+	var d = new Date( date_time ),
+		utc_month = d.getUTCMonth()+1,
+	    utc_month = utc_month>9?utc_month:'0'+utc_month,
+	    utc_date = d.getUTCDate()>9?d.getUTCDate():'0'+d.getUTCDate();
+	return d.getUTCFullYear()+'-'+(utc_month)+'-'+utc_date+' '+d.getUTCHours()+':'+d.getUTCMinutes();
+}
 
 </script>

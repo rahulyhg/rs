@@ -11,9 +11,9 @@
       <p <?php echo ($type=='preferences')?'class="active"':'';?>>
             <a href="<?php echo site_url('dashboard/profile/preferences');?>">&raquo;&nbsp;Preferences</a>
       </p>
-      <p <?php echo ($type=='verifications')?'class="active"':'';?>>
+      <!--<p <?php echo ($type=='verifications')?'class="active"':'';?>>
             <a href="<?php echo site_url('dashboard/profile/verifications');?>">&raquo;&nbsp;Verifications</a>
-      </p>
+      </p>-->
       <p <?php echo ($type=='car')?'class="active"':'';?>>
             <a href="<?php echo site_url('dashboard/profile/car');?>">&raquo;&nbsp;Car</a>
       </p>
@@ -28,7 +28,7 @@
       <p <?php echo ($type=='change_password')?'class="active"':'';?>>
             <a href="<?php echo site_url('dashboard/profile/change_password');?>">&raquo;&nbsp;Change Password</a>
       </p>
-      <p <?php echo ($type=='close_account')?'class="active"':'';?>>
+      <!--<p <?php echo ($type=='close_account')?'class="active"':'';?>>
             <a href="<?php echo site_url('dashboard/profile/close_account');?>">&raquo;&nbsp;Close my account</a>
-      </p>      
+      </p> -->     
 </div>

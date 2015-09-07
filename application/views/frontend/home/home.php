@@ -18,12 +18,19 @@
 	</div>
 	<div class="search">
 		<p>Find your ride offered by many drivers across Asia...</p>
-		<form>
+		<form id="ride_search" method="post" action="<?php echo site_url('ride_sharing');?>">
 			<input type="text" data-type="origin" name="from" id="from" class="input-from autocomplete" title="From" placeholder="From"   />
 
 			<input type="text" data-type="destination" name="to" id="to" class="input-to autocomplete" title="To" placeholder="To"   />
-			<input type="text" name="date" id="date" class="input-date datepicker" title="Date" placeholder="yyyy-mm-dd"  />
-			<input type="submit"  name="search" id="search" value="Search Now" />
+			<input type="text" name="jdate" id="jdate" class="input-date datepicker" title="Date" placeholder="yyyy-mm-dd"  />
+			<input type="button"  name="search" id="search" value="Search Now" />
+
+			<input type="hidden" name="origin_name" />
+			<input type="hidden" name="origin_latlng" />
+			<input type="hidden" name="origin_address" />
+			<input type="hidden" name="dest_name" />
+			<input type="hidden" name="dest_latlng" />
+			<input type="hidden" name="dest_address" />
 		</form>
 	</div>
 </div>
@@ -75,3 +82,38 @@
 	</div>
 
 </div>
+
+<script type="text/javascript">
+$(function(){
+	$('input[name="search"]').on('click', function()
+	{
+		if( $.isEmptyObject(roadShare.origin) )
+		{
+			alert('Please choose Origin.');
+		}
+		else if( $.isEmptyObject(roadShare.destination) )
+		{
+			alert('Please choose Destination.');
+		}
+		else if( $('#jdate').val() == '' )
+		{
+			alert('Please select Journey date.');
+		}
+		else
+		{
+			$('input[name="origin_name"]').val(roadShare.origin.name);
+			$('input[name="origin_latlng"]').val(roadShare.origin.LatLngString);
+			$('input[name="origin_address"]').val(roadShare.origin.formatted_address);
+
+			$('input[name="dest_name"]').val(roadShare.destination.name);
+			$('input[name="dest_latlng"]').val(roadShare.destination.LatLngString);
+			$('input[name="dest_address"]').val(roadShare.destination.formatted_address);
+
+			$("#ride_search").submit();
+		}
+
+		//console.log(roadShare.origin);
+	});
+});
+
+</script>

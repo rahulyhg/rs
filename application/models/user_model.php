@@ -47,6 +47,15 @@ class User_Model extends App_model {
         return $result->row_array();
     }
 
+    public function get_address_by_user_id( $id = 0 )
+    {
+        $this->db->select();
+        $this->db->from('address');
+        $this->db->where('user_id', $id);
+        $result = $this->db->get();
+        return $result->row_array();
+    }
+
     
 }
 ?>

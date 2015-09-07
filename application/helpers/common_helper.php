@@ -433,4 +433,81 @@ function is_valid_user($user_id = 0)
     return $result->num_rows()?TRUE:FALSE;
 }
 
+function is_valid_date($date, $format = 'Y-m-d')
+{
+    $d = DateTime::createFromFormat($format, $date);
+    return $d && $d->format($format) == $date;
+}
+
+function get_countries( )
+{
+
+      $CI = & get_instance();
+      $results = $CI->db->order_by('name', 'ASC')->get('countries')->result_array();
+
+      $countries = array();
+
+      if( !count($results) )
+            return $countries;      
+
+      foreach ($results as $row)
+      {
+            $countries[$row['code']] = $row['name'];
+      }
+      return $countries;
+    
+}
+
+function get_age($birth_date)
+{
+    return floor((time() - strtotime($birth_date))/31556926);
+}
+
+function get_org_dest($data = array(), $key = '')
+{
+    $tmp = array();
+    
+    switch ($key) {
+        case 'origin_name':
+            if( $data['towards'] == 'down' )
+                $key = 'dest_name';
+            break;
+        
+        case 'origin_address':
+            if( $data['towards'] == 'down' )
+                $key = 'dest_address';
+            break;
+
+        case 'origin_latlng':
+            if( $data['towards'] == 'down' )
+                $key = 'dest_latlng';
+            break;
+
+        case 'dest_name':
+            if( $data['towards'] == 'down' )
+                $key = 'origin_name';
+            break;
+
+        case 'dest_address':
+            if( $data['towards'] == 'down' )
+                $key = 'origin_address';
+            break;
+
+        case 'dest_latlng':
+            if( $data['towards'] == 'down' )
+                $key = 'origin_latlng';
+            break;
+        default:
+            # code...
+            break;
+    }
+
+    if( isset($data[$key]) )
+    {
+        return $data[$key];
+    }
+    
+    return '';
+}
+
 ?>
