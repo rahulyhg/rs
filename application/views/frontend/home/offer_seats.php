@@ -370,7 +370,7 @@ $('.submit-btn').on('click', function(){
 
 	//console.log($data);
 	$.ajax({
-		url:site_url+'offer_seats',
+		url:site_url+'/offer_seats',
 		method :'POST',
 		data:$data,
 		dataType :'json',

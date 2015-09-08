@@ -83,6 +83,7 @@
 
                         </div>
                   </div>
+                  <div class="clear"></div>
             <?php endforeach;?>
 
             <?php else:?>

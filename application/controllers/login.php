@@ -98,12 +98,12 @@ class Login extends App_Controller {
             {
                 $str = 'Your Request has been processed.Please click the following link to reset password. ';
 
-                $str .= '<a href = "'.base_url().'reset_password/'.$this->get_encoded_string($email).'">Click here</a>';
+                $str .= '<a href = "'.site_url().'reset_password/'.$this->get_encoded_string($email).'">Click here</a>';
 
                 $this->load->library('email_manager');
                 $this->load->config('email');
                 $email_details = $this->config->item('details','email');
-                die($str);
+                
                 if( $email_details )
                     $this->email_manager->send_email($email, '', $email_details['email_id'], $email_details['from_name'], "{$email_details['site_name']} - Password Reset Link", $str);  
             

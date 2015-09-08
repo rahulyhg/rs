@@ -51,6 +51,10 @@
             </tbody>
         </table>
         <?php endif; ?>
+
+        <div>
+            <a class="button" href="<?php echo site_url('dashboard/profile/car/add');?>">Add Car</a>
+        </div>
     </div>
 </div>
 
@@ -67,7 +71,7 @@
             return this.each(function() {
                 var self = this;
                 settings.button = self;
-                settings.url = site_url+'dashboard/upload_car/'+self.id;
+                settings.url = site_url+'/dashboard/upload_car/'+self.id;
                 settings.name = 'uploadfile';
                 settings.responseType = 'json';
                 settings.onComplete = function( filename, response ) {

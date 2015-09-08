@@ -17,7 +17,7 @@ window.onload = function() {
 
   var uploader = new ss.SimpleUpload({
         button: btn,
-        url: site_url+'dashboard/upload_photo',
+        url: site_url+'/dashboard/upload_photo',
         //progressUrl:site_url+'dashboard/upload_progress',
         //checkProgressInterval:100,
         //allowedExtensions: ['jpg', 'jpeg', 'png', 'gif'],

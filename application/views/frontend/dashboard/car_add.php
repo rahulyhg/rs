@@ -100,7 +100,7 @@
 $(function(){
     $('select[name="make_id"]').on('change', function(){
         $.ajax({
-            url:site_url+'dashboard/profile/car/get_models/'+this.value,
+            url:site_url+'/dashboard/profile/car/get_models/'+this.value,
             type:'POST',
             dataType:'json',
             success:function(resp)
