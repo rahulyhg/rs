@@ -400,7 +400,10 @@ function convertToGMT( date_time )
 		utc_month = d.getUTCMonth()+1,
 	    utc_month = utc_month>9?utc_month:'0'+utc_month,
 	    utc_date = d.getUTCDate()>9?d.getUTCDate():'0'+d.getUTCDate();
-	return d.getUTCFullYear()+'-'+(utc_month)+'-'+utc_date+' '+d.getUTCHours()+':'+d.getUTCMinutes();
+	    utc_hr = d.getUTCHours()>9?d.getUTCHours():'0'+d.getUTCHours();
+	    utc_min = d.getUTCMinutes()>9?d.getUTCMinutes():'0'+d.getUTCMinutes();
+
+	return d.getUTCFullYear()+'-'+(utc_month)+'-'+utc_date+' '+utc_hr+':'+utc_min;
 }
 
 </script>
